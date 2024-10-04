@@ -98,11 +98,17 @@
     </div>
     </form>
     {{ if . }}
-    <div class="artist-output" id="artistOutput">{{ .Artist }}</div>
+<label>Artist</label>
+    <div class="artist-output" id="artistOutput" >{{ .Artist }}</div>
+    <label>Members</label>
     <div class="artist-output" id="artistOutput">{{ .Members }}</div>
+    <label>Albums</label>
     <div class="artist-output" id="artistOutput">{{ .Albums }}</div>
+    <label>Album Years</label>
     <div class="artist-output" id="artistOutput">{{ .AlbumYears }}</div>
+    <label>Locations</label>
     <div class="artist-output" id="artistOutput">{{ .Locations }}</div>
+    <label>Concert Dates</label>
     <div class="artist-output" id="artistOutput">{{ .ConcertDates }}</div>
 
     {{ end }}
