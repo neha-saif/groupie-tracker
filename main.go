@@ -10,12 +10,12 @@ import (
 
 
 type Data struct {
-	artist []string
-	members []string
-	albums []string
-	albumyears []string
-	locations []string
-	concertdates []string
+	Artist      []string
+    Members     []string
+    Albums      []string
+    AlbumYears  []string
+    Locations   []string
+    ConcertDates []string
 }
 
 
@@ -23,7 +23,7 @@ func main () {
 
 // handler functions
 http.HandleFunc("/", homepage)
-http.HandleFunc("/mumford", Mumford)
+http.HandleFunc("/result", result)
 http.ListenAndServe(":8080", nil)
 
 }
@@ -44,21 +44,21 @@ t, err := template.ParseFiles("index.html")
 }
 
 // different function for each artist 
-func Mumford(w http.ResponseWriter, r *http.Request) {
-	fileName := "mumford"
-
+func result(w http.ResponseWriter, r *http.Request) {
+	fileName := "artists/"+r.FormValue("artist")
+fmt.Println(fileName)
 	fileLines := functions.Read(fileName) 
 
-Mumford := Data{
-artist : strings.Split(fileLines[0],","),
-members : strings.Split(fileLines[1],","),
-albums : strings.Split(fileLines[2],","),
-	albumyears : strings.Split(fileLines[3],","),
-	locations : strings.Split(fileLines[4],","),
-	concertdates : strings.Split(fileLines[5],","),
+name := Data{
+Artist : strings.Split(fileLines[0],","),
+Members : strings.Split(fileLines[1],","),
+Albums : strings.Split(fileLines[2],","),
+	AlbumYears : strings.Split(fileLines[3],","),
+	Locations : strings.Split(fileLines[4],","),
+	ConcertDates : strings.Split(fileLines[5],","),
 }	
 
-fmt.Println(Mumford.members)
+fmt.Println(name.Albums)
 	// Parse the HTML template again for the resultpage
 	t, err := template.ParseFiles("index.html")
 	if err != nil {
@@ -67,7 +67,7 @@ fmt.Println(Mumford.members)
 	}
 
 	// Render the template with the result
-	err = t.Execute(w, Mumford)
+	err = t.Execute(w, name)
 	if err != nil {
 		http.Error(w, "Error executing template", http.StatusInternalServerError)
 	}
