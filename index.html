@@ -60,7 +60,7 @@
             text-align: left;
             margin-top: 1rem;
             padding: 12px;
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgba(162, 11, 182, 0.5);
             border-radius: 10px;
             height: 300px;
             width: 95%;
@@ -98,7 +98,13 @@
     </div>
     </form>
     {{ if . }}
-    <div class="artist-output" id="artistOutput">{{ . }}</div>
+    <div class="artist-output" id="artistOutput">{{ .Artist }}</div>
+    <div class="artist-output" id="artistOutput">{{ .Members }}</div>
+    <div class="artist-output" id="artistOutput">{{ .Albums }}</div>
+    <div class="artist-output" id="artistOutput">{{ .AlbumYears }}</div>
+    <div class="artist-output" id="artistOutput">{{ .Locations }}</div>
+    <div class="artist-output" id="artistOutput">{{ .ConcertDates }}</div>
+
     {{ end }}
   </div>
 </body>
