@@ -1,10 +1,11 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"os"
+	"groupie/functions"
+	"net/http"
 	"strings"
+	"text/template"
 )
 
 
@@ -20,22 +21,33 @@ type Data struct {
 
 func main () {
 
-fileName := "data"
-	file, err := os.Open(fileName + ".txt")
+// handler functions
+http.HandleFunc("/", homepage)
+http.HandleFunc("/mumford", Mumford)
+http.ListenAndServe(":8080", nil)
+
+}
+func homepage (w http.ResponseWriter, r *http.Request) {
+// where form value is collected for artist name annd fed innto the relavent funnction
+//ie- artist = r.FormValue = mumford
+t, err := template.ParseFiles("index.html")
 	if err != nil {
-		fmt.Println("Error opening file:", err)
-		return 
-	}
-	defer file.Close() 
-	Scanner := bufio.NewScanner(file)
-	var fileLines []string
-	for Scanner.Scan() {
-		fileLines = append(fileLines, Scanner.Text())
-	}
-	if err := Scanner.Err(); err != nil {
-		fmt.Println("Error reading file:", err)
+		http.Error(w, "Error parsing html", http.StatusInternalServerError)
 		return
 	}
+
+	// execute the HTML template
+	err = t.Execute(w, nil)
+	if err != nil {
+		http.Error(w, "Error executing template", http.StatusInternalServerError)
+	}
+}
+
+// different function for each artist 
+func Mumford(w http.ResponseWriter, r *http.Request) {
+	fileName := "mumford"
+
+	fileLines := functions.Read(fileName) 
 
 Mumford := Data{
 artist : strings.Split(fileLines[0],","),
@@ -47,6 +59,16 @@ albums : strings.Split(fileLines[2],","),
 }	
 
 fmt.Println(Mumford.members)
+	// Parse the HTML template again for the resultpage
+	t, err := template.ParseFiles("index.html")
+	if err != nil {
+		http.Error(w, "Error parsing html", http.StatusInternalServerError)
+		return
+	}
 
-
+	// Render the template with the result
+	err = t.Execute(w, Mumford)
+	if err != nil {
+		http.Error(w, "Error executing template", http.StatusInternalServerError)
+	}
 }
