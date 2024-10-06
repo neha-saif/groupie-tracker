@@ -1,0 +1,6 @@
+"Oasis"
+"Liam Gallagher", "Noel Gallagher", "Paul Arthurs", "Paul McGuigan", "Tony McCarroll", "Alan White"
+"Definitely Maybe", "(What's the Story) Morning Glory?", "Be Here Now", "Standing on the Shoulder of Giants", "Heathen Chemistry", "Don't Believe the Truth", "Dig Out Your Soul"
+"1994", "1995", "1997", "2000", "2002", "2005", "2008"
+"Manchester", "London", "Paris", "Tokyo", "Los Angeles"
+"1996-04-27", "2000-07-07", "2005-09-10", "2008-10-16", "2009-08-22"

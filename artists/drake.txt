@@ -1,0 +1,6 @@
+"Drake"
+"Aubrey Drake Graham"
+"Room for Improvement", "Comeback Season", "So Far Gone", "Thank Me Later", "Take Care", "Nothing Was the Same", "If You're Reading This It's Too Late", "What a Time to Be Alive", "Views", "Scorpion", "Certified Lover Boy", "Honestly, Nevermind", "For All the Dogs"
+"2006", "2007", "2009", "2010", "2011", "2013", "2015", "2015", "2016", "2018", "2021", "2022", "2023"
+"Toronto", "New York", "Los Angeles", "London", "Paris"
+"2015-09-26", "2016-07-20", "2017-10-12", "2018-12-02", "2023-03-18"

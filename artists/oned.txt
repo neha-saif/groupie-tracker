@@ -1,0 +1,6 @@
+"One Direction"
+"Harry Styles", "Niall Horan", "Liam Payne", "Louis Tomlinson", "Zayn Malik"
+"Up All Night", "Take Me Home", "Midnight Memories", "Four", "Made in the A.M."
+"2011", "2012", "2013", "2014", "2015"
+"London", "Los Angeles", "New York", "Sydney", "Tokyo"
+"2014-08-04", "2015-03-25", "2015-07-28", "2016-09-30", "2017-06-10"
