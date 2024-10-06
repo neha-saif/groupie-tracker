@@ -3,7 +3,10 @@ package main
 import (
 	"fmt"
 	"groupie/functions"
+	"image/jpeg"
+	"image"
 	"net/http"
+	"os"
 	"strings"
 	"text/template"
 )
@@ -16,6 +19,7 @@ type Data struct {
     AlbumYears  []string
     Locations   []string
     ConcertDates []string
+	ImageCover image.Image
 }
 
 
@@ -24,6 +28,7 @@ func main () {
 // handler functions
 http.HandleFunc("/", homepage)
 http.HandleFunc("/result", result)
+http.Handle("/images/", http.StripPrefix("/images/", http.FileServer(http.Dir("./images"))))
 http.ListenAndServe(":8080", nil)
 
 }
@@ -48,7 +53,7 @@ func result(w http.ResponseWriter, r *http.Request) {
 	fileName := "artists/"+r.FormValue("artist")
 fmt.Println(fileName)
 	fileLines := functions.Read(fileName) 
-
+	img , _ := LoadImage(r.FormValue("artist"))
 name := Data{
 Artist : strings.Split(fileLines[0],","),
 Members : strings.Split(fileLines[1],","),
@@ -56,8 +61,9 @@ Albums : strings.Split(fileLines[2],","),
 	AlbumYears : strings.Split(fileLines[3],","),
 	Locations : strings.Split(fileLines[4],","),
 	ConcertDates : strings.Split(fileLines[5],","),
+	ImageCover: img, 
 }	
-
+fmt.Println(name.ImageCover)
 fmt.Println(name.Albums)
 	// Parse the HTML template again for the resultpage
 	t, err := template.ParseFiles("index.html")
@@ -71,4 +77,19 @@ fmt.Println(name.Albums)
 	if err != nil {
 		http.Error(w, "Error executing template", http.StatusInternalServerError)
 	}
+}
+
+func  LoadImage (name string) (image.Image, error){
+	file, err := os.Open("/images/"+name+".jpeg")
+	fmt.Println("/images/"+name+".jpeg")
+	if err !=nil{
+		return nil, err
+	}
+	defer file.Close()
+
+	ImageCover, err := jpeg.Decode(file)
+	if err != nil{
+		return nil, err
+	}
+	return ImageCover, nil
 }

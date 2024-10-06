@@ -73,11 +73,25 @@
             overflow-y: scroll;
             overflow-x: scroll;
         }
+         /* .result-output {
+            background-color: rgba(0, 128, 0, 0.2);
+            border: 1px solid #008000;
+            color: #008000;
+        } */
+
+        .container.result-active .boxes {
+            display: none;
+        }
+
+        .container.result-active .result-container {
+            display: block;
+        }
+
     </style>
 </head>
 
 <body>
-    <div class="container">
+    <div class="container {{ if . }}result-active{{ end }}">
         <form action="/result" method="post">
             <div class="title">
                 <h1>Groupie Tracker</h1>
@@ -87,18 +101,40 @@
                 <button class="box" type="submit" id="artist" name="artist" value="mumford">
                     <p>Mumford & Sons</p>
                 </button>
-                <div class="box"></div>
-                <div class="box"></div>
-                <div class="box"></div>
-                <div class="box"></div>
-                <div class="box"></div>
-                <div class="box"></div>
-                <div class="box"></div>
-                <div class="box"></div>
+                <button class="box" type="submit" id="artist" name="artist" value="taylor">
+                    <p>Taylor Swift</p>
+                </button>                
+                <button class="box" type="submit" id="artist" name="artist" value="oasis">
+                    <p>Oasis</p>
+                </button>                    
+                <button class="box" type="submit" id="artist" name="artist" value="oned">
+                    <p>One Direction</p>
+                </button>
+                <button class="box" type="submit" id="artist" name="artist" value="drake">
+                    <p>Drake</p>
+                </button>
+                <button class="box" type="submit" id="artist" name="artist" value="macm">
+                    <p>Mac Miller</p>
+                </button>
+                <button class="box" type="submit" id="artist" name="artist" value="jcole">
+                    <p>J Cole</p>
+                </button>
+                <button class="box" type="submit" id="artist" name="artist" value="linkin">
+                    <p>Linkin Park</p>
+                </button>
+                <button class="box" type="submit" id="artist" name="artist" value="travis">
+                    <p>Travis Scott</p>
+                </button>
     </div>
     </form>
     {{ if . }}
-<label>Artist</label>
+    <div class="result-container">
+<label>Artist</label> 
+<div>
+<img src="{{.ImageCover}}" alt="Album Cover" width="200">
+</div>
+     <div class="artist-output" id="artistOutput" >{{ .ImageCover }}</div>
+    <label>Members</label>
     <div class="artist-output" id="artistOutput" >{{ .Artist }}</div>
     <label>Members</label>
     <div class="artist-output" id="artistOutput">{{ .Members }}</div>
