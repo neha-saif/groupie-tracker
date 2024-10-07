@@ -3,10 +3,10 @@ package main
 import (
 	"fmt"
 	"groupie/functions"
-	"image/jpeg"
-	"image"
+	//"image/jpeg"
+	//"image"
 	"net/http"
-	"os"
+	//"os"
 	"strings"
 	"text/template"
 )
@@ -19,7 +19,7 @@ type Data struct {
     AlbumYears  []string
     Locations   []string
     ConcertDates []string
-	ImageCover image.Image
+	ImageCover string
 }
 
 
@@ -53,7 +53,8 @@ func result(w http.ResponseWriter, r *http.Request) {
 	fileName := "artists/"+r.FormValue("artist")
 fmt.Println(fileName)
 	fileLines := functions.Read(fileName) 
-	img , _ := LoadImage(r.FormValue("artist"))
+	//img , _ := LoadImage(r.FormValue("artist"))
+	fileNameI :="/images/"+r.FormValue("artist")+".jpeg"
 name := Data{
 Artist : strings.Split(fileLines[0],","),
 Members : strings.Split(fileLines[1],","),
@@ -61,7 +62,7 @@ Albums : strings.Split(fileLines[2],","),
 	AlbumYears : strings.Split(fileLines[3],","),
 	Locations : strings.Split(fileLines[4],","),
 	ConcertDates : strings.Split(fileLines[5],","),
-	ImageCover: img, 
+	ImageCover: fileNameI, 
 }	
 fmt.Println(name.ImageCover)
 fmt.Println(name.Albums)
@@ -79,17 +80,17 @@ fmt.Println(name.Albums)
 	}
 }
 
-func  LoadImage (name string) (image.Image, error){
-	file, err := os.Open("/images/"+name+".jpeg")
-	fmt.Println("/images/"+name+".jpeg")
-	if err !=nil{
-		return nil, err
-	}
-	defer file.Close()
+// func  LoadImage (name string) (image.Image, error){
+// 	file, err := os.Open("/images/"+name+".jpeg")
+// 	fmt.Println("/images/"+name+".jpeg")
+// 	if err !=nil{
+// 		return nil, err
+// 	}
+// 	defer file.Close()
 
-	ImageCover, err := jpeg.Decode(file)
-	if err != nil{
-		return nil, err
-	}
-	return ImageCover, nil
-}
+// 	ImageCover, err := jpeg.Decode(file)
+// 	if err != nil{
+// 		return nil, err
+// 	}
+// 	return ImageCover, nil
+// }
