@@ -1,6 +1,0 @@
-"Travis Scott"
-"Jacques Bermon Webster II"
-"Owl Pharaoh", "Days Before Rodeo", "Rodeo", "Birds in the Trap Sing McKnight", "Astroworld", "Utopia"
-"2013", "2014", "2015", "2016", "2018", "2023"
-"Houston", "Los Angeles", "New York", "London", "Paris"
-"2017-04-30", "2018-08-03", "2019-11-09", "2021-10-29", "2023-07-28"

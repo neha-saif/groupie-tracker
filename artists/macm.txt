@@ -1,6 +1,0 @@
-"Mac Miller"
-"Malcolm James McCormick"
-"K.I.D.S.", "Best Day Ever", "Blue Slide Park", "Watching Movies with the Sound Off", "GO:OD AM", "The Divine Feminine", "Swimming", "Circles"
-"2010", "2011", "2011", "2013", "2015", "2016", "2018", "2020"
-"Pittsburgh", "Los Angeles", "New York", "London", "Chicago"
-"2013-08-02", "2015-09-18", "2016-10-22", "2018-12-09", "2020-01-17"
