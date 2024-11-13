@@ -5,89 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Groupie Tracker</title>
-    <style>
-        html,
-        body {
-            height: 100%;
-            /* Ensures full height for the body and html */
-            margin: 0;
-            /* Removes default margin */
-        }
-
-        .container {
-            height: 400%;
-            /* This will now take 400% of the viewport height */
-        }
-
-        .title {
-            text-align: center;
-        }
-
-        .boxes {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            /* 3 columns */
-            gap: 10px;
-            /* Adds space between the boxes */
-            background-color: pink;
-            /* margin-left: auto;
-            margin-right: auto; */
-            align-items: center;
-            height: 800px;
-            padding-left: 50px;
-            padding-top: 20px;
-        }
-
-        .box {
-            width: 30%;
-            height: 150px;
-            background-color: lightblue;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-            /* Smooth transition for zoom */
-        }
-
-        .box:hover {
-            transform: scale(1.2);
-            /* Zoom effect on hover */
-        }
-
-        h1 {
-            text-align: center;
-        }
-
-        .artist-output {
-            text-align: left;
-            margin-top: 1rem;
-            padding: 12px;
-            background-color: rgba(162, 11, 182, 0.5);
-            border-radius: 10px;
-            height: 100px;
-            width: 95%;
-            border: 1px solid #ccc;
-            white-space: pre;
-            font-family: monospace;
-            font-size: 1.1rem;
-            color: #fff;
-            resize: none;
-            overflow-y: scroll;
-            overflow-x: scroll;
-        }
-         /* .result-output {
-            background-color: rgba(0, 128, 0, 0.2);
-            border: 1px solid #008000;
-            color: #008000;
-        }  */
-
-        .container.result-active .boxes {
-            display: none;
-        }
-
-        .container.result-active .result-container {
-            display: block;
-        }
-
-    </style>
+    <link rel="stylesheet" href="/style/style.css">
 </head>
 
 <body>
@@ -104,11 +22,11 @@
                 </button>
                 {{ end }}
     </div>
-    </form>
-    <!-- {{if .}}
-    <h1>{{.Artist}}</h1>
-    {{end}} -->
-  </div>
+  
+
+
+
+</form>
 </body>
 
 </html>

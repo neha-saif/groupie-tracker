@@ -2,6 +2,9 @@ package main
 
 import (
 	"fmt"
+	"reflect"
+	"strconv"
+
 	//"strconv"
 	//"groupie/functions"
 	"io"
@@ -19,17 +22,19 @@ type Data struct {
 	ID           int      `json:"id"`
 	Image        string   `json:"image"`
 	Artist       string   `json:"name"`
-	Members      []string `json:"members"`
+	Members      []string `json:"members"` //
 	AlbumYear    int      `json:"creationDate"`
 	Album1       string   `json:"firstAlbum"`
-	Locations    []string `json:"locations"`
-	ConcertDates []string `json:"concertDates"`
+	Locations    string `json:"locations"`//
+	ConcertDates string `json:"concertDates"`//
 	RelUrl       string   `json:"relations"`
+
 }
 
-type Origin struct {
-	Name string
-	URL  string
+type UrellesData struct {
+	Locations    string `json:"locations"`//
+	ConcertDates string `json:"concertDates"`//
+	RelUrl       string   `json:"relations"`
 }
 
 func main() {
@@ -41,9 +46,8 @@ func main() {
 	http.ListenAndServe(":8080", nil)
 }
 
-func LoadData() ([]Data, error) {
-	url := "https://groupietrackers.herokuapp.com/api/artists"
-	response, err := http.Get(url)
+func LoadData(Url string) ([]Data, error) {
+	response, err := http.Get(Url)
 	if err != nil {
 		fmt.Println("Error getting response from url")
 	}
@@ -68,7 +72,7 @@ func homepage(w http.ResponseWriter, r *http.Request) {
 	// where form value is collected for artist name annd fed innto the relavent funnction
 	//ie- artist = r.FormValue = mumford
 
-	character, _ := LoadData()
+	character, _ := LoadData("https://groupietrackers.herokuapp.com/api/artists")
 	for i := 0; i < 52; i++ {
 		character[i] = Data{
 			ID:           character[i].ID,
@@ -80,6 +84,7 @@ func homepage(w http.ResponseWriter, r *http.Request) {
 			Locations:    character[i].Locations,
 			ConcertDates: character[i].ConcertDates,
 			RelUrl:       character[i].RelUrl,
+	
 		}
 
 	}
@@ -93,17 +98,35 @@ func homepage(w http.ResponseWriter, r *http.Request) {
 	err = t.Execute(w, character)
 	if err != nil {
 		http.Error(w, "Error executing template", http.StatusInternalServerError)
+		return
 	}
 
 }
 
-func result(w http.ResponseWriter, r *http.Request) {
+func result(wr http.ResponseWriter, r *http.Request) {
 	artId := r.FormValue("artist")
 	fmt.Println(r.FormValue("artist"))
 	fmt.Println(artId)
+	fmt.Println(reflect.TypeOf(artId))
 
-	character, _ := LoadData()
-	for i := 0; i < 52; i++ {
+	character, err := LoadData("https://groupietrackers.herokuapp.com/api/artists") 
+	if err != nil {
+		fmt.Println("err:",err)
+	}
+
+	// i, err := strconv.Atoi(artId)
+	// if err != nil {
+	// 	http.Error(w, "Invalid artist ID", http.StatusBadRequest)
+	// 	return
+	// }
+
+	iint, err := strconv.Atoi(artId)
+	if err != nil {
+		http.Error(wr, "Invalid artist ID", http.StatusBadRequest)
+		return
+	}
+i := iint - 1
+	fmt.Println("i:",i)
 		character[i] = Data{
 			ID:           character[i].ID,
 			Image:        character[i].Image,
@@ -115,18 +138,18 @@ func result(w http.ResponseWriter, r *http.Request) {
 			ConcertDates: character[i].ConcertDates,
 			RelUrl:       character[i].RelUrl,
 		}
-	}
-
 	
-	t, err := template.ParseFiles("index.html")
+fmt.Println("char:",character[i])
+	CharData := character[i]
+	t, err := template.ParseFiles("result.html")
 	if err != nil {
-		http.Error(w, "Error parsing html", http.StatusInternalServerError)
+		http.Error(wr, "Error parsing html", http.StatusInternalServerError)
 		return
 	}
 
-
-	err = t.Execute(w, character)
+	err = t.Execute(wr,CharData)
 	if err != nil {
-		http.Error(w, "Error executing template", http.StatusInternalServerError)
+		http.Error(wr, "Error executing template ya", http.StatusInternalServerError)
+		return
 	}
 }
