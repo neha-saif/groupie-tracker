@@ -1,37 +1,68 @@
-groupie-tracker
-Objectives
-Groupie Trackers consists on receiving a given API and manipulate the data contained in it, in order to create a site, displaying the information.
+# Groupie Tracker
 
-It will be given an API, that consists in four parts:
+## Objectives
 
-The first one, artists, containing information about some bands and artists like their name(s), image, in which year they began their activity, the date of their first album and the members.
+Groupie Tracker is a project focused on creating a user-friendly website by interacting with a given API and displaying its data in an engaging and visual way. The project emphasizes data manipulation, visualization, and client-server interaction.
 
-The second one, locations, consists in their last and/or upcoming concert locations.
+The API consists of four main parts:
 
-The third one, dates, consists in their last and/or upcoming concert dates.
+1. **Artists**: Contains information about bands and artists, including:
 
-And the last one, relation, does the link between all the other parts, artists, dates and locations.
+   - Names
+   - Images
+   - Year they began their activity
+   - Date of their first album
+   - Members
 
-Given all this you should build a user friendly website where you can display the bands info through several data visualizations (examples : blocks, cards, tables, list, pages, graphics, etc). It is up to you to decide how you will display it.
+2. **Locations**: Details their last and/or upcoming concert locations.
 
-This project also focuses on the creation of events/actions and on their visualization.
+3. **Dates**: Provides information on their last and/or upcoming concert dates.
 
-The event/action we want you to do is known as a client call to the server (client-server). We can say it is a feature of your choice that needs to trigger an action. This action must communicate with the server in order to recieve information, ([request-response])(https://en.wikipedia.org/wiki/Request%E2%80%93response)
-An event consists in a system that responds to some kind of action triggered by the client, time, or any other factor.
-Instructions
-The backend must be written in Go.
-The site and server cannot crash at any time.
-All pages must work correctly and you must take care of any errors.
-The code must respect the good practices.
-It is recommended to have test files for unit testing.
-Allowed packages
-Only the standard Go packages are allowed.
-Usage
-You can see an example of a RESTful API here
-This project will help you learn about :
+4. **Relation**: Links the artists, dates, and locations together.
 
-Manipulation and storage of data.
-JSON files and format.
-HTML.
-Event creation and display.
-Client-server.
+Using this API, you will build a website to display band information through various data visualizations, such as:
+
+- Blocks
+- Cards
+- Tables
+- Lists
+- Pages
+- Graphics
+
+The approach to displaying the information is up to you, but the goal is to create an intuitive and visually appealing user experience.
+
+## Features
+
+### Event/Action System
+
+A key feature of the project is implementing **client-server interaction**, which involves:
+
+- Creating an event or action triggered by the client, time, or another factor.
+- Communicating with the server to retrieve data through a [request-response](https://en.wikipedia.org/wiki/Request%E2%80%93response) cycle.
+- Visualizing the triggered event/action on the site.
+
+## Instructions
+
+- The backend **must** be written in **Go**.
+- The site and server **cannot crash** at any time.
+- All pages must work correctly, and errors should be handled gracefully.
+- The code must follow **best practices**.
+- It is recommended to include **unit tests** for your code.
+
+### Allowed Packages
+
+- Only standard Go packages are permitted.
+
+## Usage
+
+An example of a RESTful API can be found [here](https://example.com).
+
+## Learning Goals
+
+This project will help you develop skills in:
+
+- Manipulating and storing data
+- Working with JSON files and formats
+- Building and styling HTML pages
+- Creating and displaying events
+- Understanding client-server communication
