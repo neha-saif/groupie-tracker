@@ -9,28 +9,27 @@ import (
 )
 
 type Final struct {
-	ID           int
-	Image        string
-	Artist       string
-	Members      string
-	AlbumYear    int
-	Album1       string
-	Locations    string
+	ID        int
+	Image     string
+	Artist    string
+	Members   string
+	AlbumYear int
+	Album1    string
+	Locations []string
 }
 
 func main() {
 	// handler functions
+	http.Handle("/style/", http.StripPrefix("/style/", http.FileServer(http.Dir("style"))))
 	http.HandleFunc("/", homepage)
 	http.HandleFunc("/result", result)
-	http.Handle("/style/", http.StripPrefix("/style/", http.FileServer(http.Dir("style"))))
 	http.ListenAndServe(":8080", nil)
 }
-
 
 func homepage(w http.ResponseWriter, r *http.Request) {
 
 	character, _ := functions.LoadData("https://groupietrackers.herokuapp.com/api/artists")
-	
+
 	t, err := template.ParseFiles("index.html")
 	if err != nil {
 		http.Error(w, "Error parsing html", http.StatusInternalServerError)
@@ -59,7 +58,7 @@ func result(wr http.ResponseWriter, r *http.Request) {
 		http.Error(wr, "Failed to load artist data", http.StatusInternalServerError)
 		return
 	}
-	
+
 	if len(character) == 0 {
 		http.Error(wr, "No artist data available", http.StatusInternalServerError)
 		return
@@ -81,23 +80,24 @@ func result(wr http.ResponseWriter, r *http.Request) {
 		members = strings.Join(character[i].Members, ", ")
 	}
 
-	cdata := ""
-	x:='1'
+	var cdata []string
+	x := '1'
+	d := ""
 	for location, date := range charData[i].DatesLocations {
-		cdata += string(x) +") " +strings.ReplaceAll(string(location),"-",", ") +": "+ strings.Join(date,", ") + "; " 
+		d = string(x) + ") " + strings.ReplaceAll(string(location), "-", ", ") + ": " + strings.Join(date, ", ")
+		d = strings.ReplaceAll(d, "_", " ")
+		cdata = append(cdata,d)
 		x++
 	}
 
-	cdata = strings.ReplaceAll(cdata,"_"," ") 
-
-FFinal := Final{
-		ID:           character[i].ID,
-		Image:        character[i].Image,
-		Artist:       character[i].Artist,
-		Members:      members,
-		AlbumYear:    character[i].AlbumYear,
-		Album1:       character[i].Album1,
-		Locations:    cdata,
+	FFinal := Final{
+		ID:        character[i].ID,
+		Image:     character[i].Image,
+		Artist:    character[i].Artist,
+		Members:   members,
+		AlbumYear: character[i].AlbumYear,
+		Album1:    character[i].Album1,
+		Locations:  cdata,
 	}
 
 	t, err := template.ParseFiles("result.html")

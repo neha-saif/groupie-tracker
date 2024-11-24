@@ -9,27 +9,27 @@
 </head>
 
 <body>
-    
-        <form action="/result" method="post">
-            <div class="title">
-                <h1>Groupie Tracker</h1>
-                <br>
-            </div>
-            <div class="boxes">
-                {{ range . }}
-                <button class="box" type="submit" id="{{.ID}}" name="artist" value="{{.ID}}">
-<div class ="box">
+
+    <form action="/result" method="post">
+        <div class="title">
+            <h1>Groupie Tracker</h1>
+            <br>
+        </div>
+        <div class="boxes">
+            {{ range . }}
+            <button class="box" type="submit" id="{{.ID}}" name="artist" value="{{.ID}}">
+                <div class="box">
                     <img src="{{.Image}}" alt="Image">
                     <p>{{.Artist}}</p>
-</div>
-                </button>
-                {{ end }}
-    </div>
-  
+                </div>
+            </button>
+            {{ end }}
+        </div>
 
 
 
-</form>
+
+    </form>
 </body>
 
 </html>
